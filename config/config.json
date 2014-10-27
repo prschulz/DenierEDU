@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "climate_deniers",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "climate_deniers",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "climate_deniers",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
