@@ -56,22 +56,7 @@ module.exports = {
       picture: {
         type: DataTypes.STRING
       },
-      industry1_name: {
-        type: DataTypes.STRING
-      },
-      industry1_total: {
-        type: DataTypes.STRING
-      },
-      industry2_name: {
-        type: DataTypes.STRING
-      },
-      industry2_total: {
-        type: DataTypes.STRING
-      },
-      industry3_name: {
-        type: DataTypes.STRING
-      },
-      industry3_total: {
+      oc_email: {
         type: DataTypes.STRING
       },
       createdAt: {

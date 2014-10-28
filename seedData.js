@@ -54,7 +54,7 @@ var updatePoliticianSL = function (results,id) {
     }).success(function(politician){
 
 //Calling Open Secrets API
-      openSecrets(politician,updatePoliticianOS);
+      // openSecrets(politician,updatePoliticianOS);
 
     }); //end success function for Open Secrets
   }); //end done on Politician

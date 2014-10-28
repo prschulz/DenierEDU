@@ -18,16 +18,12 @@ module.exports = function(sequelize, DataTypes) {
     twitter_id: DataTypes.STRING,
     facebook_id: DataTypes.STRING,
     picture: DataTypes.STRING,
-    industry1_name: DataTypes.STRING,
-    industry1_total: DataTypes.STRING,
-    industry2_name: DataTypes.STRING,
-    industry2_total: DataTypes.STRING,
-    industry3_name: DataTypes.STRING,
-    industry3_total: DataTypes.STRING
+    oc_email: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Politician.hasMany(models.Industry);
+        Politician.hasMany(models.IndustriesPoliticians, {as:'Contribution'});
       }
     }
   });
