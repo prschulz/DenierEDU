@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="politician">
+  <% allReps.forEach(function(rep){ %>
+      <h3><%= rep.firstname %> <%= rep.lastname %></h3>
+      <p><%= rep.quote %> <a href="<%= rep.quote_source%>">Source</a></p>
+    <% }) %>
+</div>
+<h1>Senate</h1>
+<div class="politician">
+  <% allSenators.forEach(function(senator){ %>
+      <h3><%= senator.firstname %> <%= senator.lastname %></h3>
+      <p><%= senator.quote %> <a href="<%= senator.quote_source%>">Source</a></p>
+    <% }) %>
+</div>
+
+</body>
+</html>

@@ -53,39 +53,90 @@ var updatePoliticianSL = function (results,id) {
       twitter_id: results.twitter_id,
       facebook_id: results.facebook_id,
       picture: "http://theunitedstates.io/images/congress/225x275/"+results.bioguide_id
-    }).success(function(){}); //end updateAttributes
+    }).success(function(politician){
+
+//Calling Open Secrets API
+      openSecrets(politician,updatePoliticianOS);
+
+    }); //end success function for Open Secrets
   }); //end done on Politician
 };//end updatePolitician function
 
 // var politician = seed[0];
-// sunlight(politician, updatePolitician);
+// sunlight(politician, updatePoliticianSL);
 
 //edge case for nickname
 // var politician = seed[96];
-// sunlight(politician,updatePolitician);
+// sunlight(politician,updatePoliticianSL);
 
+//--------Open Secrets API functions---------//
+var openSecrets = function (politician, callback) {
+  var cid = politician.crp_id,
+  cycle = 2014,
+  apiKey = "0aef7eebeabf36223930da190ee29d8a";
+  var url = "http://www.opensecrets.org/api/?method=candIndustry&cid="+cid+"&cycle="+cycle+"&output=json&apikey="+apiKey;
+
+  request(url, function (error, response, body) {
+    // console.log("request made!");
+    // console.log(error);
+    if (!error && response.statusCode == 200) {
+      var openSecretsObj = JSON.parse(body);
+      // console.log(openSecretsObj);
+
+      callback(openSecretsObj, politician.id);
+      }//end if
+  });//end request
+};//end openSecrets function
+
+var updatePoliticianOS = function (results,id) {
+  // var goodies = []
+  db.Politician.find(id).done(function (err, politician) {
+    var obj = {};
+    results.response.industries.industry.forEach(function(data,i){
+      var attr = data['@attributes'];
+      // if(index<3) goodies.push(data['@attributes']);
+      if(i<3){
+        obj["industry" + (i+1) + "_name"] = attr.industry_name;
+        obj["industry" + (i+1) + "_total"] = attr.total;
+        // console.log(obj);
+      }
+    });
+    politician.updateAttributes(obj).success(function() {});
+  });
+
+  // goodies.forEach(function(data,index){
+
+  // })
+
+  // console.log(goodies[0].industry_name);
+  // console.log("ID",id);
+  // console.log(goodies);
+};
+
+//--------------DATABASE SEEDING---------------//
+
+for (var i = 0; i < seed.length; i++) {
 
 db.Politician.findOrCreate({where: {
-  firstname: seed[0].firstname,
-  lastname: seed[0].lastname,
-  quote: seed[0].denierstatement,
-  quote_source: seed[0].denierquoteurl
+  firstname: seed[i].firstname,
+  lastname: seed[i].lastname,
+  quote: seed[i].denierstatement,
+  quote_source: seed[i].denierquoteurl
 },
 defaults: {
-  firstname: seed[0].firstname,
-  lastname: seed[0].lastname,
-  quote: seed[0].denierstatement,
-  quote_source: seed[0].denierquoteurl
+  firstname: seed[i].firstname,
+  lastname: seed[i].lastname,
+  quote: seed[i].denierstatement,
+  quote_source: seed[i].denierquoteurl
 }
 }).done(function(error,politician){
   if(error){console.log(error);
   } else {
-    // console.log(politician);
-    // console.log("POLITICIAN NAME:",politician[0].firstname);
+    //calling sunlight foundation API and callback with nested openSecrets API call
     sunlight(politician[0], updatePoliticianSL);
-    console.log(politician[0]);
   }
   });
+};
 
 
 

@@ -17,7 +17,11 @@ app.use(methodOverride('_method'));
 
 
 app.get('/', function(req, res){
-  res.send('Hello World');
+  db.Politician.findAll({where: {chamber:'house'}, order:'lastname ASC'}).done(function (err,reps) {
+    db.Politician.findAll({where: {chamber:'senate'}, order:'lastname ASC'}).done(function(err,senators){
+      res.render('home', {allReps: reps, allSenators: senators});
+    });
+  });
 });
 
 
