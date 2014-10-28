@@ -2,11 +2,8 @@ var db = require('./models/index'),
     seed = require('./OFAdata'),
     request = require('request');
 
-// test seed
-// console.log(seed[0]);
 
-
-
+//--------Sunlight API functions---------//
 
 var sunlight = function (politician, callback) {
   var first_name = politician.firstname,
@@ -52,6 +49,7 @@ var updatePoliticianSL = function (results,id) {
       contact_form: results.contact_form,
       twitter_id: results.twitter_id,
       facebook_id: results.facebook_id,
+      oc_email: results.oc_email,
       picture: "http://theunitedstates.io/images/congress/225x275/"+results.bioguide_id
     }).success(function(politician){
 
@@ -65,11 +63,12 @@ var updatePoliticianSL = function (results,id) {
 // var politician = seed[0];
 // sunlight(politician, updatePoliticianSL);
 
-//edge case for nickname
+// //edge case for nickname
 // var politician = seed[96];
 // sunlight(politician,updatePoliticianSL);
 
 //--------Open Secrets API functions---------//
+
 var openSecrets = function (politician, callback) {
   var cid = politician.crp_id,
   cycle = 2014,
@@ -103,14 +102,6 @@ var updatePoliticianOS = function (results,id) {
     });
     politician.updateAttributes(obj).success(function() {});
   });
-
-  // goodies.forEach(function(data,index){
-
-  // })
-
-  // console.log(goodies[0].industry_name);
-  // console.log("ID",id);
-  // console.log(goodies);
 };
 
 //--------------DATABASE SEEDING---------------//
