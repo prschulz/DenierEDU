@@ -13,12 +13,6 @@ app.use(methodOverride('_method'));
 
 app.get('/', function(req, res){
   db.Politician.findAll({where: {chamber:'house'}, include: [db.IndustriesPoliticians]}).done(function (err,reps) {
-    console.log(reps);
-
-  // Elie screwing around...
-    // For each Poltician with db.IndustriesPoliticians included
-    // db.Politician.find({where:{id:134},include: [db.IndustriesPoliticians, db.Industry]}).done(function (err,reps) {
-    // console.log(reps.dataValues.IndustriesPoliticians);
     db.Politician.findAll({where: {chamber:'senate'}, order:'lastname ASC'}).done(function(err,senators){
       res.render('home', {allReps: reps, allSenators: senators});
     });
