@@ -89,18 +89,16 @@ var openSecrets = function (politician, callback) {
 
 var updatePoliticianOS = function (results,id) {
   db.Politician.find(id).done(function (err, politician) {
+    var politicianObj = {};
     results.response.industries.industry.forEach(function(data,i){
       //variables to help in creation
       var attr = data['@attributes'];
 
       //seed Politician table with top 3 industries
-      var politicianIndustryName = "industry"+(i+1)+"_name";
-      var politicianIndustryTotal = "industry"+(i+1)+"_total";
-      if(i<3){
-        db.politician.updateAttributes({
-          politicianIndustryName: attr.industry_name,
-          politicianIndustryTotal: attr.total
-        });
+       if(i<3){
+        politicianObj["industry" + (i+1) + "_name"] = attr.industry_name;
+        politicianObj["industry" + (i+1) + "_total"] = attr.total;
+        // console.log(obj);
       } //end if
 
       var indName = {name:attr.industry_name};
@@ -115,17 +113,18 @@ var updatePoliticianOS = function (results,id) {
         });//end of 2nd done
       }); //end of 1st done
     });//end of forEach
+  politician.updateAttributes(politicianObj).success(function() {}); //load industry values into Politician table
   });//end of Politician.find
 };//end of updatePoliticianOS function
 
 //--------------DATABASE SEEDING---------------//
 
-for (var i = 0; i < seed.length; i++) {
+// for (var i = 0; i < seed.length; i++) {
   //storing ofaData for findOrCreate
-  var ofa = {firstname: seed[i].firstname,
-    lastname: seed[i].lastname,
-    quote: seed[i].denierstatement,
-    quote_source: seed[i].denierquoteurl};
+  var ofa = {firstname: seed[0].firstname,
+    lastname: seed[0].lastname,
+    quote: seed[0].denierstatement,
+    quote_source: seed[0].denierquoteurl};
 
   db.Politician.findOrCreate({where: ofa, defaults: ofa}) // findOrCreate on OFA data
   .done(function(error,politician){
@@ -134,6 +133,6 @@ for (var i = 0; i < seed.length; i++) {
       sunlight(politician[0], updatePoliticianSL); //calling sunlight foundation API and callback with nested openSecrets API call
     }
   });//end done function
-} //end loop
+// } //end loop
 
 

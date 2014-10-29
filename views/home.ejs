@@ -6,6 +6,11 @@
   <% allReps.forEach(function(rep){ %>
       <h3><%= rep.firstname %> <%= rep.lastname %></h3>
       <p><%= rep.quote %> <a href="<%= rep.quote_source%>">Source</a></p>
+      <ol>
+        <li> <%= rep.industry1_name %> - <%= rep.industry1_total %> </li>
+        <li> <%= rep.industry2_name %> - <%= rep.industry2_total %> </li>
+        <li> <%= rep.industry3_name %> - <%= rep.industry3_total %> </li>
+      </ol>
     <% }) %>
 </div>
 <h1>Senate</h1>
@@ -14,6 +19,11 @@
   <% allSenators.forEach(function(senator){ %>
       <h3><%= senator.firstname %> <%= senator.lastname %></h3>
       <p><%= senator.quote %> <a href="<%= senator.quote_source%>">Source</a></p>
+      <ol>
+        <li> <%= rep.industry1_name %> - <%= rep.industry1_total %> </li>
+        <li> <%= rep.industry2_name %> - <%= rep.industry2_total %> </li>
+        <li> <%= rep.industry3_name %> - <%= rep.industry3_total %> </li>
+      </ol>
     <% }) %>
 </div>
 
