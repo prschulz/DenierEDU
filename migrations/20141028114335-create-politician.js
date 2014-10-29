@@ -59,6 +59,24 @@ module.exports = {
       oc_email: {
         type: DataTypes.STRING
       },
+      industry1_name: {
+        type: DataTypes.STRING,
+      },
+      industry1_total: {
+        type: DataTypes.STRING,
+      },
+      industry2_name: {
+        type: DataTypes.STRING,
+      },
+      industry2_total: {
+        type: DataTypes.STRING,
+      },
+      industry3_name: {
+        type: DataTypes.STRING,
+      },
+      industry3_total: {
+        type: DataTypes.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

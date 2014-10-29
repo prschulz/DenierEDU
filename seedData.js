@@ -54,7 +54,7 @@ var updatePoliticianSL = function (results,id) {
     }).success(function(politician){
 
 //Calling Open Secrets API
-      // openSecrets(politician,updatePoliticianOS);
+      openSecrets(politician,updatePoliticianOS);
 
     }); //end success function for Open Secrets
   }); //end done on Politician
@@ -88,46 +88,52 @@ var openSecrets = function (politician, callback) {
 };//end openSecrets function
 
 var updatePoliticianOS = function (results,id) {
-  // var goodies = []
   db.Politician.find(id).done(function (err, politician) {
-    var obj = {};
     results.response.industries.industry.forEach(function(data,i){
+      //variables to help in creation
       var attr = data['@attributes'];
-      // if(index<3) goodies.push(data['@attributes']);
+
+      //seed Politician table with top 3 industries
+      var politicianIndustryName = "industry"+(i+1)+"_name";
+      var politicianIndustryTotal = "industry"+(i+1)+"_total";
       if(i<3){
-        obj["industry" + (i+1) + "_name"] = attr.industry_name;
-        obj["industry" + (i+1) + "_total"] = attr.total;
-        // console.log(obj);
-      }
-    });
-    politician.updateAttributes(obj).success(function() {});
-  });
-};
+        db.politician.updateAttributes({
+          politicianIndustryName: attr.industry_name,
+          politicianIndustryTotal: attr.total
+        });
+      } //end if
+
+      var indName = {name:attr.industry_name};
+      db.Industry.findOrCreate({where:indName, defaults:indName}) // find or create industry based on name
+      .done(function(error,industry){
+        var ipAtts = {PoliticianId: politician.id, IndustryId: industry[0].id}; //variable to help findOrCreate below it
+        db.IndustriesPoliticians.findOrCreate({where:ipAtts, defaults:ipAtts}) //end industriesPoliticians find or create
+        .done(function(error,industrypolitician){  //done to update amount for given politician. Separate to allow for updating.
+          industrypolitician[0].updateAttributes({
+            amount: attr.total
+          });//end updateAttributes
+        });//end of 2nd done
+      }); //end of 1st done
+    });//end of forEach
+  });//end of Politician.find
+};//end of updatePoliticianOS function
 
 //--------------DATABASE SEEDING---------------//
 
 for (var i = 0; i < seed.length; i++) {
+  //storing ofaData for findOrCreate
+  var ofa = {firstname: seed[i].firstname,
+    lastname: seed[i].lastname,
+    quote: seed[i].denierstatement,
+    quote_source: seed[i].denierquoteurl};
 
-db.Politician.findOrCreate({where: {
-  firstname: seed[i].firstname,
-  lastname: seed[i].lastname,
-  quote: seed[i].denierstatement,
-  quote_source: seed[i].denierquoteurl
-},
-defaults: {
-  firstname: seed[i].firstname,
-  lastname: seed[i].lastname,
-  quote: seed[i].denierstatement,
-  quote_source: seed[i].denierquoteurl
-}
-}).done(function(error,politician){
-  if(error){console.log(error);
-  } else {
-    //calling sunlight foundation API and callback with nested openSecrets API call
-    sunlight(politician[0], updatePoliticianSL);
-  }
-  });
-};
-
+  db.Politician.findOrCreate({where: ofa, defaults: ofa}) // findOrCreate on OFA data
+  .done(function(error,politician){
+    if(error){console.log(error);}
+    else {
+      sunlight(politician[0], updatePoliticianSL); //calling sunlight foundation API and callback with nested openSecrets API call
+    }
+  });//end done function
+} //end loop
 
 

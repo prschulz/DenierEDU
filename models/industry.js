@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Industry.hasMany(models.Politician);
-        Industry.hasMany(models.IndustriesPoliticians,{as:'Contribution'});
+        Industry.hasMany(models.IndustriesPoliticians);
       }
     }
   });

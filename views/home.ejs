@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-</head>
-<body>
+<% include partials/header %>
 
+<h1>House of Representatives</h1>
+<hr>
 <div class="politician">
   <% allReps.forEach(function(rep){ %>
       <h3><%= rep.firstname %> <%= rep.lastname %></h3>
@@ -14,6 +9,7 @@
     <% }) %>
 </div>
 <h1>Senate</h1>
+<hr>
 <div class="politician">
   <% allSenators.forEach(function(senator){ %>
       <h3><%= senator.firstname %> <%= senator.lastname %></h3>
@@ -21,5 +17,4 @@
     <% }) %>
 </div>
 
-</body>
-</html>
+<% include partials/footer %>
