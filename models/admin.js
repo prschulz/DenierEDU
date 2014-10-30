@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         allowNull: false,
         validate: {
-          len: [6, 30]
+          len: [5, 30]
         }
     },
     password: DataTypes.STRING
@@ -26,8 +26,8 @@ module.exports = function(sequelize, DataTypes) {
       // don't salt twice when you compare....watch out for this
         return bcrypt.compareSync(userpass, dbpass);
     },
-      createNewUser:function(username, password, err, success ) {
-        if(password.length < 6) {
+      createNewAdmin:function(username, password, err, success ) {
+        if(password.length < 5) {
           err({message: "Password should be more than six characters"});
         }
         else{
@@ -77,7 +77,7 @@ module.exports = function(sequelize, DataTypes) {
           if (admin === null){
             return done (null, false, req.flash('loginMessage', 'username does not exist.'));
           }
-          if ((admin.comparePass(password, admin.password)) !== true){
+          if ((Admin.comparePass(password, admin.password)) !== true){
             return done (null, false, req.flash('loginMessage', 'Invalid Password'));
           }
           done(null, admin);

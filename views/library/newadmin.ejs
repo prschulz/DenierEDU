@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+  <form action="/submit" method ="POST">
+    <p>
+      <label for="user">Username:</label>
+      <input type="text" name="username" id="user" autofocus>
+    </p>
+    <p>
+      <label for="pass">Password:</label>
+      <input type="password" name="password" id="pass">
+    </p>
+    <p>
+      <input type="submit" value="Sign up!" class = "btn btn-primary">
+    </p>
+  </form>
+
+<% include ../partials/footer %>

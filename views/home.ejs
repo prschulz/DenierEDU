@@ -1,30 +1,196 @@
 <% include partials/header %>
+<div id="wrap">
 
-<h1>House of Representatives</h1>
+<header class="masthead">
+
+<!-- search by state -->
+  <div class="container">
+    <div class="row">
+        <div class="search-box">
+            <form action="/search" role="search" class="search-form"> <!-- form control for search -->
+                <select class="form-control" id="state" name="state"> <!-- State search list -->
+                  <option>Search by state...</option>
+                    <% allStates.forEach(function(state){ %>
+                      <option value="<%= state %>"><%= state %></option>
+                      <% }) %>
+                </select>
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+    </div>
+  </div>
+</header>
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-custom navbar-static-top" id="nav">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav nav-justified">
+          <li><a href="#representatives">Representatives</a></li>
+          <li><a href="#senators">Senators</a></li>
+
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="container"><!-- reopen container div that will close in footer -->
+
+<div class="divider" id="representatives"></div>
+<h2 class="text-center">House of Representatives</h2>
 <hr>
-<div class="politician">
-  <% allReps.forEach(function(rep){ %>
-      <h3><%= rep.firstname %> <%= rep.lastname %></h3>
-      <p><%= rep.quote %> <a href="<%= rep.quote_source%>">Source</a></p>
-      <ol>
-        <li> <%= rep.industry1_name %> - <%= rep.industry1_total %> </li>
-        <li> <%= rep.industry2_name %> - <%= rep.industry2_total %> </li>
-        <li> <%= rep.industry3_name %> - <%= rep.industry3_total %> </li>
-      </ol>
+    <!-- IF NO REPS IN STATE SEARCH -->
+    <% if (allReps.length === 0) { %>
+      <p class="lead">There are no Representatives from <%= state %>.<p>
+    <% } %>
+
+    <% allReps.forEach(function(rep){ %>
+    <div class="politician">
+      <!-- ROW FOR WHOLE DIV -->
+      <div class="row">
+        <!-- img div -->
+        <div class="col-xs-12 col-sm-3">
+          <img class="politician-image desaturate"src="<%=rep.picture%>" alt="">
+        </div>
+        <!-- div to hold all other elements -->
+        <div class="col-xs-12 col-sm-9">
+
+          <!-- 1st row for name and district -->
+          <div class="row inner-row-1">
+            <div class="col-xs-12">
+              <h4 class="politician-name"><%= rep.title %>. <%= rep.firstname %> <%= rep.lastname %>  |  <%= rep.state %>-<%= rep.district %></h4>
+            </div>
+          </div><!-- end of 1st inner row -->
+
+          <!-- 2nd row for quote -->
+          <div class="row inner-row-2">
+            <!-- DIV FOR QUOTE -->
+            <div class="col-xs-12">
+              <div class="quote-box">
+                <p class="quote"><%= rep.quote %> <a class="source" href="<%= rep.quote_source%>" target="_blank">[Source]</a></p>
+              </div>
+            </div> <!-- end quote div -->
+          </div><!-- end of 2nd inner row -->
+          <div class="row inner-row-3">
+            <!-- DIV FOR INDUSTRIES -->
+            <div class="col-xs-12 col-sm-6 industry-box">
+              <p class="text-center funding-title"><span class="lead">Follow the Funding</span><br>
+              Top 3 Industries</p>
+                <ol>
+                  <li class="industry"> <%= rep.industry1_name %></li>
+                  <li class="industry"> <%= rep.industry2_name %></li>
+                  <li class="industry"> <%= rep.industry3_name %></li>
+                </ol>
+            </div><!-- end industries div -->
+            <!-- DIV FOR EDUCATION -->
+            <div class="col-xs-12 col-sm-6 educate-box">
+              <p class="text-center funding-title"><span class="lead">Educate</span><br>
+              Send some science...</p>
+               <div class="row">
+                 <div class="col-xs-12 text-center">
+
+                  <a href="http://twitter.com/home?status=@<%=rep.twitter_id%>%20Please%20take%20a%20look%20at%20the%20science%20behind%20climate%20change" target="_blank">
+                    <img class="social-icon" src="images/twitter.png" alt="twitter">
+                  </a>
+                  <img class="social-icon" src="images/email.png" alt="email">
+                 </div>
+               </div>
+            </div><!-- end education div -->
+
+          </div><!-- end of 3rd inner row -->
+
+        </div>
+
+      </div><!-- end row for rep -->
+     </div><!-- end politician div -->
+     <hr>
     <% }) %>
-</div>
-<h1>Senate</h1>
+
+<br>
+
+<div class="divider" id="senators"></div>
+<h2 class="text-center">Senate</h2>
 <hr>
-<div class="politician">
+  <!-- IF NO SENATORS IN STATE SEARCH -->
+  <% if (allSenators.length === 0) { %>
+    <p class="lead">There are no Senators from <%= state %>.<p>
+  <% } %>
+
   <% allSenators.forEach(function(senator){ %>
-      <h3><%= senator.firstname %> <%= senator.lastname %></h3>
-      <p><%= senator.quote %> <a href="<%= senator.quote_source%>">Source</a></p>
-      <ol>
-        <li> <%= rep.industry1_name %> - <%= rep.industry1_total %> </li>
-        <li> <%= rep.industry2_name %> - <%= rep.industry2_total %> </li>
-        <li> <%= rep.industry3_name %> - <%= rep.industry3_total %> </li>
-      </ol>
-    <% }) %>
-</div>
+  <div class="politician">
+      <!-- ROW FOR WHOLE DIV -->
+      <div class="row">
+        <!-- img div -->
+        <div class="col-xs-12 col-sm-3">
+          <img class="politician-image desaturate"src="<%=senator.picture%>" alt="">
+        </div>
+        <!-- div to hold all other elements -->
+        <div class="col-xs-12 col-sm-9">
 
+          <!-- 1st row for name and district -->
+          <div class="row inner-row-1">
+            <div class="col-xs-12">
+              <h4 class="politician-name"><%= senator.title %>. <%= senator.firstname %> <%= senator.lastname %>  |  <%= senator.state %></h4>
+            </div>
+          </div><!-- end of 1st inner row -->
+
+          <!-- 2nd row for quote -->
+          <div class="row inner-row-2">
+            <!-- DIV FOR QUOTE -->
+            <div class="col-xs-12">
+              <div class="quote-box">
+                <p class="quote"><%= senator.quote %> <a class="source" href="<%= senator.quote_source%>" target="_blank">[Source]</a></p>
+              </div>
+            </div> <!-- end quote div -->
+          </div><!-- end of 2nd inner row -->
+          <div class="row inner-row-3">
+            <!-- DIV FOR INDUSTRIES -->
+            <div class="col-xs-12 col-sm-6 industry-box">
+              <p class="text-center funding-title"><span class="lead">Follow the Funding</span><br>
+              Top 3 Industries</p>
+                <ol>
+                  <li class="industry"> <%= senator.industry1_name %></li>
+                  <li class="industry"> <%= senator.industry2_name %></li>
+                  <li class="industry"> <%= senator.industry3_name %></li>
+                </ol>
+            </div><!-- end industries div -->
+            <!-- DIV FOR EDUCATION -->
+            <div class="col-xs-12 col-sm-6 educate-box">
+              <p class="text-center funding-title"><span class="lead">Educate</span><br>
+              Send some science...</p>
+               <div class="row">
+                 <div class="col-xs-12 text-center">
+
+                  <a href="http://twitter.com/home?status=@<%=senator.twitter_id%>%20Please%20take%20a%20look%20at%20the%20science%20behind%20climate%20change">
+                  <img class="social-icon" src="images/twitter.png" alt="twitter">
+                  </a>
+                  <img class="social-icon" src="images/email.png" alt="email">
+
+                 </div>
+               </div>
+            </div><!-- end education div -->
+
+          </div><!-- end of 3rd inner row -->
+
+        </div>
+
+      </div><!-- end row for senator -->
+     </div><!-- end politician div -->
+     <hr>
+  <% }) %>
+
+</div><!-- close wrap -->
+
+<ul class="nav pull-right scroll-top">
+  <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+</ul>
+
+<script src="javascripts/scripts.js"></script>
 <% include partials/footer %>

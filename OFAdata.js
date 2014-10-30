@@ -1612,19 +1612,6 @@ party: "R",
 district: 2
 },
 {
-twitter: "gopleader",
-denierquoteurl: "http://www.youtube.com/watch?v=YJb3xLLk4hQ",
-status: "Denier",
-photourl: "https://secure.assets.bostatic.com/apps/lincoln/media/person_photos/400060.jpg",
-state: "VA",
-denierstatement: "“If there’s been any constant in human history, it’s been climate change. The real question is the severity of that and the involvement of human causes in all of that.”",
-role: "House",
-lastname: "Cantor",
-firstname: "Eric",
-party: "R",
-district: 7
-},
-{
 twitter: "Randy_Forbes",
 denierquoteurl: "http://www.timesdispatch.com/business/article_c99f5f98-f5f0-5f0b-8ccc-7b2cce7a8a72.html",
 status: "Denier",

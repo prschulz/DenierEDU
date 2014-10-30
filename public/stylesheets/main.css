@@ -1,0 +1,327 @@
+body{
+  font-family: 'Raleway', sans-serif;
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+  -webkit-font-smoothing: antialiased;
+  background-image: url(../images/cream_dust.png)
+}
+
+hr{
+  border-top: 1px dotted #333
+}
+
+.header-div{
+  height:400px;
+  width:100%;
+}
+
+.educate-box, .industry-box{
+  padding:5px 30px;
+}
+
+.inner-row-1, .inner-row-2, .inner-row-3{
+  padding-top: 5px;
+  padding-bottom:5px;
+}
+
+.politician{
+  padding-bottom: 10px;
+  padding-top:10px;
+  }
+
+.politician-image{
+  border-radius:10px;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 225px;
+  max-height: 275px;
+}
+
+.industry {
+  color: #555555;
+  font-size:1.2em;
+}
+
+.masthead {
+  height: 500px;
+  background-image: url(http://www.navinsarmaphotography.com/wp-content/uploads/2012/04/washington_dc_skyline_lightning.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media (min-width: 768px) {
+  ul.nav > li {
+    display: inline-block;
+    width: 20%;
+  }
+}
+
+.navbar-toggle .icon-bar {
+  background: #ffffff;
+}
+
+
+
+/*---------QUOTE CSS----------*/
+.quote-box{
+  min-height:100px;
+  background-color: rgba(160, 175, 184, 0.1);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote{
+  font-size:1.2em;
+  color:#555555;
+  padding:20px;
+}
+
+.source{
+  font-size:.8em;
+  font-style: bold;
+  font-style: italic;
+  color:#333333;
+}
+
+.funding-title{
+  border-bottom: 1px solid #555555;
+}
+
+img.desaturate{
+-webkit-filter: grayscale(100%);
+filter: grayscale(100%);
+filter: gray;
+filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+}
+
+/*--------Social Icons---------*/
+.social-icon{
+  width: 75px;
+  height: 75px;
+}
+
+/*media query to arrange elements when extra small*/
+@media (max-width: 768px) {
+  .politician-image{
+    width:225px;
+    height:275px;
+  }
+
+  .politician-name{
+    text-align: center;
+  }
+ }
+
+
+.row {
+  margin-left:0px;
+  margin-right:0px;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+  margin-top:50px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer {
+  background-color:#414141;
+}
+
+#footer a {
+  color:#efefef;
+}
+
+header {
+  background: #333;
+  color:#555;
+}
+
+header .dropdown-menu {
+  top:74px;
+  background: #ffcc33;
+  border-width:0;
+}
+
+h1 {
+  font-size:50px;
+}
+
+.logo {
+  font-size:40px;
+  position:absolute;
+  z-index:1200;
+  color:#333;
+  top:70px;
+  text-align:center;
+  width:100%;
+}
+
+#nav {
+  width: 100%;
+  position:static;
+  top:-32px;
+}
+
+#nav.affix {
+   position: fixed;
+   top: 0;
+   z-index:10;
+   -webkit-transition: all .6s ease-in-out;
+}
+
+#footer > .container {
+
+}
+
+@media (min-width: 767px) {
+  .navbar-nav.nav-justified > li{
+      float:right;
+  }
+}
+
+.navbar-nav {
+  margin: 1px 1px;
+}
+
+/* customize nav style */
+.navbar-custom {
+    background-color:  rgba(152, 148, 148, 0.89);
+    text-transform:uppercase;
+    border-width:0;
+}
+.navbar-custom  .navbar-nav>li>a {
+  color: #ddd;
+}
+.navbar-custom  .dropdown-menu li>a:hover {
+  color: #eee;
+}
+.navbar-custom  .navbar-nav li>a:hover, .navbar-nav li .open, .navbar-custom .navbar-nav .active a  {
+  background-color:  rgba(100, 100, 100, 0.8);
+}
+.navbar-custom .navbar-nav>.dropdown>a .caret {
+  border-top-color: #999;
+  border-bottom-color: #999;
+}
+
+.navbar-collapse.in { /*3.0.2 bug workaround*/
+    overflow-y: visible;
+}
+
+.navbar-toggle {
+  outline:0;
+}
+
+.navbar-brand {
+float: left;
+height: 50px;
+padding: 15px 15px;
+font-size: 2em;
+line-height: 20px;
+text-transform: none;
+color:#333;
+}
+a:hover .navbar-brand{
+  color:#333;
+}
+
+.divider {
+  height:30px;
+}
+
+.panel {
+  border-width:0;
+}
+
+@media (max-width: 768px) {
+  header {
+
+  }
+}
+
+#map-canvas {
+    width: 100%;
+    height: 300px;
+  margin: 0;
+  padding: 15px;
+}
+
+.scroll-top {
+   position:fixed;
+   bottom:0;
+   right:1%;
+   z-index:100;
+   background: #f2f3f2;
+   font-size:24px;
+   border-top-left-radius:3px;
+   border-top-right-radius:3px;
+}
+.scroll-top a:link,.scroll-top a:visited {
+  color:#222;
+}
+
+
+.panel .img-responsive {
+  min-height:270px;
+  max-height:270px;
+}
+
+.search-box {
+  margin: 0 auto;
+  width: 100%;
+  min-width: 350px;
+  max-width: 600px;
+  text-align: center;
+}
+
+
+.search-form > select {
+  display: inline-block;
+  width: 80%;
+}
+
+.search-form > button {
+  display: inline-block;
+  width: 10%;
+}
