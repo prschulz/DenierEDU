@@ -1,3 +1,4 @@
+$(document).ready(function(){
 /* affix the navbar after scroll below header */
 $('#nav').affix({
       offset: {
@@ -20,7 +21,13 @@ $('#nav .navbar-nav li>a').click(function(){
   $('body,html').animate({scrollTop:posi},700);
 });
 
-$(document).ready(function(){
+
+
+    if ( document.location.href.indexOf('state') > -1 ) {
+    var posi = $('#representatives').offset().top-80;
+    $('body,html').animate({scrollTop:posi},700);
+  }
+
   $("#search").on("submit",function(e){
     // if selected.length < 2...prevent submission and alert
     if($("#state").val().length > 2){

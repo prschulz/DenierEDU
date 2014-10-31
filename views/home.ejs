@@ -1,27 +1,6 @@
 <% include partials/header %>
 <div id="wrap">
 
-<script>
-// $(document).ready(function(){
-  $("#search").on("submit",function(e){
-    e.preventDefault()
-    // if selected.length < 2...prevent submission and alert
-    if($("#state").val().length > 2){
-      alert("Please choose a state")
-
-    }
-  })
-// });
-
-$(function() {
-  if ( document.location.href.indexOf('state') > -1 ) {
-    var posi = $('#representatives').offset().top-80;
-    $('body,html').animate({scrollTop:posi},700);
-  }
-});
-
-</script>
-
 <a href="/"><div class="logo">DenierEDU</div></a> <!-- logo! -->
 
 <header class="masthead">
