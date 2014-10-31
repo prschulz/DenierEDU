@@ -6,12 +6,12 @@ $('#nav').affix({
 });
 
 /* highlight the top nav as scrolling occurs */
-$('body').scrollspy({ target: '#nav' })
+$('body').scrollspy({ target: '#nav' });
 
 /* smooth scrolling for scroll to top */
 $('.scroll-top').click(function(){
   $('body,html').animate({scrollTop:0},1000);
-})
+});
 
 /* smooth scrolling for nav sections */
 $('#nav .navbar-nav li>a').click(function(){
@@ -20,13 +20,12 @@ $('#nav .navbar-nav li>a').click(function(){
   $('body,html').animate({scrollTop:posi},700);
 });
 
-// $.ajax({
-//   url: "/search",
-//   data: {
-//     searchColumn: "state",
-//     searchTerm: "whatever user typed in"
-//   },
-//   success: function (responseData) {
-//     $("#container").html(myTemplate.render(responseData));
-//   }
-// });
+$(document).ready(function(){
+  $("#search").on("submit",function(e){
+    // if selected.length < 2...prevent submission and alert
+    if($("#state").val().length > 2){
+      e.preventDefault();
+      alert("Please choose a state");
+    }
+  });
+});

@@ -79,7 +79,6 @@ app.get('/', function(req, res){
 
 app.get('/search', function (req, res) {
   var state = req.query.state;
-  console.log(state);
 
   db.Politician.findAll({where: {chamber:'house', state:state},order:'lastname ASC', include: [db.IndustriesPoliticians]}).done(function (err,reps) {
     db.Politician.findAll({where: {chamber:'senate', state:state}, order:'lastname ASC'}).done(function(err,senators){
@@ -92,7 +91,7 @@ app.get('/search', function (req, res) {
         res.render('home', {allReps: reps, allSenators: senators, allStates:stateNames, state:state});
       });//end state query
     });//end senate findall
-  }); //end house findall
+  }); //end house findall}
 });//end search route
 
 
