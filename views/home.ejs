@@ -10,7 +10,14 @@ $(document).ready(function(){
       alert("Please choose a state")
     }
   })
-})
+});
+
+$(function() {
+  if ( document.location.href.indexOf('state') > -1 ) {
+    var posi = $('#representatives').offset().top-80;
+    $('body,html').animate({scrollTop:posi},700);
+  }
+});
 
 </script>
 
@@ -23,8 +30,8 @@ $(document).ready(function(){
     <!-- HEADER TEXT -->
     <div class="row">
       <div class="xs-col-12 text-center header-text-box">
-        <h2><span class="big">97%</span> of <span class="big">Scientists</span> VS. <span class="big">74%</span> of <span class="big">Congress</span><br>
-        Agree with Climate Change
+        <h2><span class="big">97%</span> of <span class="big">Scientists</span> &amp; <span class="big">74%</span> of <span class="big">Congress</span><br>
+        Believe we contribute to climate change
         </h2>
         <br>
         <h3>How can we reach the other<br><span class="big">140</span><br>members of Congress?</h3>
