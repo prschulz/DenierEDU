@@ -48,6 +48,7 @@ passport.deserializeUser(function (id,done) {
   });
 });
 
+//post to refresh database from the admin page
 app.post("/refresh",function(req,res){
   seedDataWrapper.seedDatabase();
   res.redirect('/admin');

@@ -4,12 +4,12 @@ var db = require('./models/index'),
 
 
 var seedDataWrapper = {
-//--------Sunlight API functions---------//
 
+//--------Sunlight API functions---------//
 sunlight: function (politician, callback) {
   var first_name = politician.firstname,
   last_name = politician.lastname,
-  apiKey = "64e52b50c6894c9c85ff4083a347cb84";
+  apiKey = process.env.SUNLIGHT_KEY;
   var url = "http://congress.api.sunlightfoundation.com/legislators?first_name="+first_name+"&last_name="+last_name+"&apikey="+apiKey;
 
   request(url, function (error, response, body) {
@@ -65,26 +65,20 @@ updatePoliticianSL: function (results,id) {
       picture: "http://theunitedstates.io/images/congress/225x275/"+results.bioguide_id+".jpg"
     }).success(function(politician){
 
-//Calling Open Secrets API
+      //Calling Open Secrets API
       seedDataWrapper.openSecrets(politician,seedDataWrapper.updatePoliticianOS);
 
     }); //end success function for Open Secrets
   }); //end done on Politician
 },//end updatePolitician function
 
-// var politician = seed[0];
-// sunlight(politician, updatePoliticianSL);
-
-// //edge case for nickname
-// var politician = seed[96];
-// sunlight(politician,updatePoliticianSL);
 
 //--------Open Secrets API functions---------//
 
 openSecrets: function (politician, callback) {
   var cid = politician.crp_id,
   cycle = 2014,
-  apiKey = "0aef7eebeabf36223930da190ee29d8a";
+  apiKey = process.env.OPENSECRETS_KEY;
   var url = "http://www.opensecrets.org/api/?method=candIndustry&cid="+cid+"&cycle="+cycle+"&output=json&apikey="+apiKey;
 
   request(url, function (error, response, body) {
@@ -128,6 +122,8 @@ updatePoliticianOS: function (results,id) {
   politician.updateAttributes(politicianObj).success(function() {}); //load industry values into Politician table
   });//end of Politician.find
 },//end of updatePoliticianOS function
+
+
 
 //--------------DATABASE SEEDING---------------//
 seedDatabase: function(){
