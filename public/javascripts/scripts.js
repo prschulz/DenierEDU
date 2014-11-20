@@ -22,12 +22,13 @@ $('#nav .navbar-nav li>a').click(function(){
 });
 
 
-
-    if ( document.location.href.indexOf('state') > -1 ) {
+  // scroll to the reps section when there is 'state' in the url
+  if ( document.location.href.indexOf('state') > -1 ) {
     var posi = $('#representatives').offset().top-80;
     $('body,html').animate({scrollTop:posi},700);
   }
 
+  // prevent default action on search submit if no state has been chosen
   $("#search").on("submit",function(e){
     // if selected.length < 2...prevent submission and alert
     if($("#state").val().length > 2){
